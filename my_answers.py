@@ -38,7 +38,7 @@ def cleaned_text(text):
     punctuation = ['!', ',', '.', ':', ';', '?']
     text = text.lower()
  
-    return re.sub('[^a-z\!\,\.\:\;\?\s]+',' ', text )
+    return re.sub('[^a-z\!\,\.\:\;\? ]',' ', text )
 
 ### TODO: fill out the function below that transforms the input text and window-size into a set of input/output pairs for use with our RNN model
 def window_transform_text(text, window_size, step_size):
@@ -56,6 +56,5 @@ def build_part2_RNN(window_size, num_chars):
     model = Sequential()
     model.add(LSTM(200, input_shape=(window_size, num_chars)))
     model.add(Dense(num_chars))
-    model.add(Activation('linear'))
-    model.add(Dense(num_chars, activation='softmax'))
+    model.add(Activation('softmax'))
     return model
